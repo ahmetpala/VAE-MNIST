@@ -1,0 +1,14 @@
+# See https://pre-commit.com/ for usage and config
+repos:
+  - repo: https://github.com/hhatto/autopep8
+    rev: "v2.3.2"
+    hooks:
+    -   id: autopep8
+  - repo: https://github.com/pycqa/isort
+    rev: "6.0.1"
+    hooks:
+      - id: isort
+  - repo: https://github.com/pycqa/flake8
+    rev: "7.1.2"
+    hooks:
+      - id: flake8
