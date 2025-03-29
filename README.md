@@ -4,7 +4,7 @@ This repository contains a Variational Autoencoder (VAE) model trained on the MN
 
 ---
 
-## Project Structure
+## Project structure
 
 - `model.py` – Defines the VAE architecture with a custom loss layer.
 - `generator.py` – Generates new MNIST-style digits using the trained decoder.
@@ -14,7 +14,7 @@ This repository contains a Variational Autoencoder (VAE) model trained on the MN
 
 ---
 
-## Model Architecture
+## Model architecture
 
 - **Encoder**: LSTM with 64 units → Dropout → two Dense layers for `μ` and `σ` → Sampling using the reparameterization trick.
 - **Decoder**: Dense → Reshape → two Conv2DTranspose layers.
@@ -22,7 +22,7 @@ This repository contains a Variational Autoencoder (VAE) model trained on the MN
 
 ---
 
-## 🧪 How to Run
+## How to run
 
 1. **Clone the repository:**
 
@@ -61,7 +61,7 @@ This will:
 
 ---
 
-## Code Style
+## Code style
 
 Pre-commit hooks are enabled for:
 
