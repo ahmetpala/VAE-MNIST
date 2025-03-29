@@ -8,11 +8,6 @@ from generator import generate_samples
 from model import decoder, encoder, vae
 
 
-def ensure_figures_dir(path="figures"):
-    Path(path).mkdir(exist_ok=True)
-    return path
-
-
 def plot_sample_images(x_train, save_path):
     plt.figure(figsize=(8, 6))
     for i, idx in enumerate([40, 50, 60, 70, 80, 90]):
@@ -25,11 +20,11 @@ def plot_sample_images(x_train, save_path):
 
 
 def plot_loss(history, save_path):
-    plt.plot(history['loss'], label="Train Loss")
-    plt.plot(history['val_loss'], label="Validation Loss")
+    plt.plot(history['loss'], label="Train loss")
+    plt.plot(history['val_loss'], label="Validation loss")
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
-    plt.title("Loss Curve")
+    plt.title("Loss change over epochs")
     plt.legend()
     plt.savefig(save_path)
     plt.close()
@@ -40,14 +35,14 @@ def plot_latent_space(mu, y_test, save_path):
     plt.scatter(mu[:, 0], mu[:, 1], c=y_test, cmap='brg')
     plt.xlabel('mu[:, 0]')
     plt.ylabel('mu[:, 1]')
-    plt.title("Latent Space Visualization")
+    plt.title("Latent space visualization")
     plt.colorbar()
     plt.savefig(save_path)
     plt.close()
 
 
 def main():
-    figures_dir = ensure_figures_dir()
+    figures_dir = Path("figures").mkdir(exist_ok=True)
 
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
     x_train = x_train.astype('float32') / 255
