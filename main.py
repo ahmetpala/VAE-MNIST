@@ -42,7 +42,8 @@ def plot_latent_space(mu, y_test, save_path):
 
 
 def main():
-    figures_dir = Path("figures").mkdir(exist_ok=True)
+    figures_dir = "figures"
+    Path(figures_dir).mkdir(exist_ok=True)
 
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
     x_train = x_train.astype('float32') / 255
