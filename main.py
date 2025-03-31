@@ -1,3 +1,4 @@
+import argparse
 import os
 from pathlib import Path
 
@@ -5,7 +6,7 @@ import matplotlib.pyplot as plt
 from keras.datasets import mnist
 
 from generator import generate_samples
-from model import decoder, encoder, vae
+from model import build_vae
 
 
 def plot_sample_images(x_train, save_path):
@@ -42,6 +43,15 @@ def plot_latent_space(mu, y_test, save_path):
 
 
 def main():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--latent_dim', type=int, default=2)
+    parser.add_argument('--epochs', type=int, default=100)
+    parser.add_argument('--batch_size', type=int, default=128)
+    args = parser.parse_args()
+
+    encoder, decoder, vae = build_vae(args.latent_dim)
+
     figures_dir = "figures"
     Path(figures_dir).mkdir(exist_ok=True)
 
@@ -57,8 +67,8 @@ def main():
 
     history = vae.fit(
         x_train, None,
-        epochs=100,
-        batch_size=128,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
         validation_split=0.2
     )
 
