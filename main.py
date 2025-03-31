@@ -57,7 +57,7 @@ def main():
 
     history = vae.fit(
         x_train, None,
-        epochs=3,
+        epochs=100,
         batch_size=128,
         validation_split=0.2
     )
