@@ -14,7 +14,7 @@ def sample_z(args):
     return z_mu + K.exp(z_sigma / 2) * eps
 
 
-def build_encoder(latent_dim=2):
+def build_encoder(latent_dim):
     """Builds the LSTM-based encoder model."""
     input_image = Input(shape=(28, 28), name='encoder_input')
     x = LSTM(64, activation='relu')(input_image)
@@ -25,7 +25,7 @@ def build_encoder(latent_dim=2):
     return Model(input_image, [z_mu, z_sigma, z], name='Encoder')
 
 
-def build_decoder(latent_dim=2):
+def build_decoder(latent_dim):
     decoder_input = Input(shape=(latent_dim,), name='decoder_input')
     x = Dense(14 * 14 * 64, activation='relu')(decoder_input)
     x = BatchNormalization()(x)
@@ -60,9 +60,9 @@ class CustomLayer(Layer):
         return x
 
 
-def build_vae():
-    encoder = build_encoder()
-    decoder = build_decoder()
+def build_vae(latent_dim):
+    encoder = build_encoder(latent_dim)
+    decoder = build_decoder(latent_dim)
     input_image = encoder.input
     z_mu, z_sigma, z = encoder.output
     z_decoded = decoder(z)
@@ -70,6 +70,3 @@ def build_vae():
     vae = Model(input_image, y, name='VAE')
     vae.compile(optimizer='adam', loss=None)
     return encoder, decoder, vae
-
-
-encoder, decoder, vae = build_vae()
