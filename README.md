@@ -50,8 +50,20 @@ pip install -r requirements.txt
 python main.py
 ```
 
+You can also specify the model parameters:
+
+```bash
+python main.py --latent_dim 4 --epochs 100 --batch_size 64
+```
+
+Default values:
+
+- latent_dim = 2
+- epochs = 100
+- batch_size = 128
+
 This will:
-- Train the VAE for 3 epochs on MNIST
+- Train the VAE for 100 epochs on MNIST
 - Save model files: `vae.keras` and `decoder.keras`
 - Save plots to the `figures/` folder:
   - `example_plots.png` – sample input images
