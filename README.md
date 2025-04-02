@@ -50,7 +50,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-You can also specify the model parameters:
+You can also specify the model parameters with different set of hyperparameters:
 
 ```bash
 python main.py --latent_dim 4 --epochs 100 --batch_size 64
