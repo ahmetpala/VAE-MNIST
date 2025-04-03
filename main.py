@@ -10,6 +10,7 @@ from model import build_vae
 
 
 def plot_sample_images(x_train, save_path):
+    """Plot example MNIST input images."""
     plt.figure(figsize=(8, 6))
     for i, idx in enumerate([40, 50, 60, 70, 80, 90]):
         plt.subplot(2, 3, i + 1)
@@ -21,6 +22,7 @@ def plot_sample_images(x_train, save_path):
 
 
 def plot_loss(history, save_path):
+    """Plot training and validation loss curves."""
     plt.plot(history['loss'], label="Train loss")
     plt.plot(history['val_loss'], label="Validation loss")
     plt.xlabel("Epoch")
@@ -32,6 +34,7 @@ def plot_loss(history, save_path):
 
 
 def plot_latent_space(mu, y_test, save_path):
+    """Plot 2D latent space."""
     plt.figure(figsize=(12, 8))
     plt.scatter(mu[:, 0], mu[:, 1], c=y_test, cmap='brg')
     plt.xlabel('mu[:, 0]')
