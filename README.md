@@ -1,6 +1,10 @@
 # Variational Autoencoder with LSTM and CNN on MNIST
 
-This repository contains a Variational Autoencoder (VAE) model trained on the MNIST dataset. The encoder is based on an LSTM, while the decoder uses a CNN with transposed convolutions. The project is implemented using Keras and TensorFlow.
+This project builds a Variational Autoencoder (VAE) trained on the MNIST dataset.
+
+- The **encoder** is based on an LSTM.
+- The **decoder** uses Conv2DTranspose layers.
+- Implemented with **Keras** and **TensorFlow**.
 
 ---
 
