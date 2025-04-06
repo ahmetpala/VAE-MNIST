@@ -1,5 +1,9 @@
 # Variational Autoencoder with LSTM and CNN on MNIST
 
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 This project builds a Variational Autoencoder (VAE) trained on the MNIST dataset.
 
 - The **encoder** is based on an LSTM.
