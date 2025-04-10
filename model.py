@@ -42,8 +42,10 @@ def build_decoder(latent_dim):
 
 
 class CustomLayer(Layer):
+    """Custom Keras layer that adds VAE loss (reconstruction + KL)."""
 
     def combined_loss(self, x, z_decoded, z_mu, z_sigma):
+        """Computes total VAE loss: reconstruction + KL divergence."""
         x = Flatten()(x)
         z_decoded = Flatten()(z_decoded)
 
@@ -58,6 +60,7 @@ class CustomLayer(Layer):
         return K.mean(recon_loss + kl_loss)
 
     def call(self, inputs):
+        """Adds VAE loss to model and returns input unchanged."""
         x, z_decoded, z_mu, z_sigma = inputs
         loss = self.combined_loss(x, z_decoded, z_mu, z_sigma)
         self.add_loss(loss)
@@ -65,6 +68,8 @@ class CustomLayer(Layer):
 
 
 def build_vae(latent_dim):
+    """Builds the VAE model by connecting encoder, decoder, and loss layer.
+    Returns encoder, decoder, and compiled VAE model."""
     encoder = build_encoder(latent_dim)
     decoder = build_decoder(latent_dim)
     input_image = encoder.input
