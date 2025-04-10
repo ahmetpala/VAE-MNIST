@@ -9,13 +9,15 @@ from keras.models import Model
 
 
 def sample_z(args):
+    """Samples latent vector z using reparameterization trick."""
     z_mu, z_sigma = args
     eps = K.random_normal(shape=(K.shape(z_mu)[0], K.int_shape(z_mu)[1]))
     return z_mu + K.exp(z_sigma / 2) * eps
 
 
 def build_encoder(latent_dim):
-    """Builds the LSTM-based encoder model."""
+    """Creates the encoder model using an LSTM layer.
+    Returns z_mu, z_sigma, and sampled z."""
     input_image = Input(shape=(28, 28), name='encoder_input')
     x = LSTM(64, activation='relu')(input_image)
     x = Dropout(0.2)(x)
@@ -26,6 +28,8 @@ def build_encoder(latent_dim):
 
 
 def build_decoder(latent_dim):
+    """Creates the decoder model using transposed convolution layers.
+    Takes latent vector as input and outputs reconstructed image."""
     decoder_input = Input(shape=(latent_dim,), name='decoder_input')
     x = Dense(14 * 14 * 64, activation='relu')(decoder_input)
     x = BatchNormalization()(x)
@@ -38,8 +42,10 @@ def build_decoder(latent_dim):
 
 
 class CustomLayer(Layer):
+    """Custom Keras layer that adds VAE loss (reconstruction + KL)."""
 
     def combined_loss(self, x, z_decoded, z_mu, z_sigma):
+        """Computes total VAE loss: reconstruction + KL divergence."""
         x = Flatten()(x)
         z_decoded = Flatten()(z_decoded)
 
@@ -54,6 +60,7 @@ class CustomLayer(Layer):
         return K.mean(recon_loss + kl_loss)
 
     def call(self, inputs):
+        """Adds VAE loss to model and returns input unchanged."""
         x, z_decoded, z_mu, z_sigma = inputs
         loss = self.combined_loss(x, z_decoded, z_mu, z_sigma)
         self.add_loss(loss)
@@ -61,6 +68,8 @@ class CustomLayer(Layer):
 
 
 def build_vae(latent_dim):
+    """Builds the VAE model by connecting encoder, decoder, and loss layer.
+    Returns encoder, decoder, and compiled VAE model."""
     encoder = build_encoder(latent_dim)
     decoder = build_decoder(latent_dim)
     input_image = encoder.input
