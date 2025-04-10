@@ -28,6 +28,8 @@ def build_encoder(latent_dim):
 
 
 def build_decoder(latent_dim):
+    """Creates the decoder model using transposed convolution layers.
+    Takes latent vector as input and outputs reconstructed image."""
     decoder_input = Input(shape=(latent_dim,), name='decoder_input')
     x = Dense(14 * 14 * 64, activation='relu')(decoder_input)
     x = BatchNormalization()(x)
