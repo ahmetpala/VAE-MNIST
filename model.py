@@ -9,13 +9,15 @@ from keras.models import Model
 
 
 def sample_z(args):
+    """Samples latent vector z using reparameterization trick."""
     z_mu, z_sigma = args
     eps = K.random_normal(shape=(K.shape(z_mu)[0], K.int_shape(z_mu)[1]))
     return z_mu + K.exp(z_sigma / 2) * eps
 
 
 def build_encoder(latent_dim):
-    """Builds the LSTM-based encoder model."""
+    """Creates the encoder model using an LSTM layer.
+    Returns z_mu, z_sigma, and sampled z."""
     input_image = Input(shape=(28, 28), name='encoder_input')
     x = LSTM(64, activation='relu')(input_image)
     x = Dropout(0.2)(x)
