@@ -48,6 +48,7 @@ def plot_latent_space(mu, y_test, save_path):
 def main():
 
     parser = argparse.ArgumentParser()
+    # TODO: Adjust the code for latent_dim > 2
     parser.add_argument('--latent_dim', type=int, default=2)
     parser.add_argument('--epochs', type=int, default=100)
     parser.add_argument('--batch_size', type=int, default=128)
