@@ -21,6 +21,8 @@ def generate_samples():
     grid_x = np.linspace(-4, 4, n)
     grid_y = np.linspace(-4, 4, n)[::-1]
 
+    # TODO: Add PCA for when we use latent_dimension > 2
+
     for i, yi in enumerate(grid_y):
         for j, xi in enumerate(grid_x):
             z_sample = np.array([[xi, yi]])
