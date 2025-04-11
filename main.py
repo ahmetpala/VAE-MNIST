@@ -35,6 +35,7 @@ def plot_loss(history, save_path):
 
 def plot_latent_space(mu, y_test, save_path):
     """Plot 2D latent space."""
+    # TODO: Check if mu is high dimensional (>2), if so, apply PCA
     plt.figure(figsize=(12, 8))
     plt.scatter(mu[:, 0], mu[:, 1], c=y_test, cmap='brg')
     plt.xlabel('mu[:, 0]')
