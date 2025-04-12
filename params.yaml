@@ -1,0 +1,9 @@
+train:
+  latent_dim: 2
+  epochs: 100
+  batch_size: 128
+
+paths:
+  figures_dir: figures
+  decoder_model: decoder.keras
+  vae_model: vae.keras
