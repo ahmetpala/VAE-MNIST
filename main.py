@@ -3,10 +3,19 @@ import os
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import yaml
 from keras.datasets import mnist
 
 from generator import generate_samples
 from model import build_vae
+
+with open("params.yaml", "r") as f:
+    config = yaml.safe_load(f)
+
+
+def load_config():
+    with open("params.yaml", "r") as f:
+        return yaml.safe_load(f)
 
 
 def plot_sample_images(x_train, save_path):
@@ -48,16 +57,20 @@ def plot_latent_space(mu, y_test, save_path):
 
 def main():
 
+    config = load_config()
+
     parser = argparse.ArgumentParser()
-    # TODO: Adjust the code for latent_dim > 2
-    parser.add_argument('--latent_dim', type=int, default=2)
-    parser.add_argument('--epochs', type=int, default=100)
-    parser.add_argument('--batch_size', type=int, default=128)
+    parser.add_argument('--latent_dim', type=int,
+                        default=config["train"]["latent_dim"])
+    parser.add_argument('--epochs', type=int,
+                        default=config["train"]["epochs"])
+    parser.add_argument('--batch_size', type=int,
+                        default=config["train"]["batch_size"])
     args = parser.parse_args()
 
     encoder, decoder, vae = build_vae(args.latent_dim)
 
-    figures_dir = "figures"
+    figures_dir = config["paths"]["figures_dir"]
     Path(figures_dir).mkdir(exist_ok=True)
 
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
