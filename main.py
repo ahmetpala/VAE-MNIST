@@ -3,19 +3,11 @@ import os
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import yaml
 from keras.datasets import mnist
 
 from generator import generate_samples
 from model import build_vae
-
-with open("params.yaml", "r") as f:
-    config = yaml.safe_load(f)
-
-
-def load_config():
-    with open("params.yaml", "r") as f:
-        return yaml.safe_load(f)
+from utils import load_config
 
 
 def plot_sample_images(x_train, save_path):
