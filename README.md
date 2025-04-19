@@ -17,6 +17,7 @@ This project builds a Variational Autoencoder (VAE) trained on the MNIST dataset
 - `model.py` – Defines the VAE architecture with a custom loss layer.
 - `generator.py` – Generates new MNIST-style digits using the trained decoder.
 - `main.py` – Loads data, trains the VAE, saves outputs, and visualizes training results.
+- `utils` - Contains useful functions for visualizations.
 - `requirements.txt` – Lists minimal dependencies.
 - `.pre-commit-config.yaml` – Defines formatting and linting rules.
 
