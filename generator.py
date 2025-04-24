@@ -16,6 +16,7 @@ def generate_samples():
     decoder = load_model("decoder.keras")
 
     n = 10  # 10x10 samples to be generated
+    # TODO: Adjust the visualizations for different set of examples
     figure = np.zeros((28 * n, 28 * n, 1))
 
     grid_x = np.linspace(-4, 4, n)
