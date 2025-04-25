@@ -16,7 +16,7 @@ def sample_z(args):
     return z_mu + K.exp(z_sigma / 2) * eps
 
 
-# TODO: Adjust the encoder for CNNs, make it optional
+# TODO: Adjust the encoder for CNNs, add custom cnn layer
 def build_encoder(latent_dim, use_cnn=False):
     """Creates the encoder model using an LSTM layer.
     Returns z_mu, z_sigma, and sampled z."""
