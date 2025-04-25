@@ -2,10 +2,11 @@
 using LSTM encoder and CNN decoder."""
 
 import tensorflow.keras.backend as K
-from keras.layers import (LSTM, BatchNormalization, Conv2DTranspose, Dense,
-                          Dropout, Flatten, Input, Lambda, Layer, Reshape)
-from keras.metrics import binary_crossentropy
-from keras.models import Model
+from tensorflow.keras.layers import (LSTM, BatchNormalization, Conv2DTranspose,
+                                     Dense, Dropout, Flatten, Input, Lambda,
+                                     Layer, Reshape)
+from tensorflow.keras.metrics import binary_crossentropy
+from tensorflow.keras.models import Model
 
 
 def sample_z(args):
@@ -16,7 +17,7 @@ def sample_z(args):
 
 
 # TODO: Adjust the encoder for CNNs, make it optional
-def build_encoder(latent_dim):
+def build_encoder(latent_dim, use_cnn=False):
     """Creates the encoder model using an LSTM layer.
     Returns z_mu, z_sigma, and sampled z."""
     input_image = Input(shape=(28, 28), name='encoder_input')
