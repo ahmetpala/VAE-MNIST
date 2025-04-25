@@ -17,7 +17,7 @@ def sample_z(args):
 
 
 # TODO: Adjust the encoder for CNNs, make it optional
-def build_encoder(latent_dim):
+def build_encoder(latent_dim, use_cnn=False):
     """Creates the encoder model using an LSTM layer.
     Returns z_mu, z_sigma, and sampled z."""
     input_image = Input(shape=(28, 28), name='encoder_input')
