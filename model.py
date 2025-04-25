@@ -2,10 +2,11 @@
 using LSTM encoder and CNN decoder."""
 
 import tensorflow.keras.backend as K
-from keras.layers import (LSTM, BatchNormalization, Conv2DTranspose, Dense,
-                          Dropout, Flatten, Input, Lambda, Layer, Reshape)
-from keras.metrics import binary_crossentropy
-from keras.models import Model
+from tensorflow.keras.layers import (LSTM, BatchNormalization, Conv2DTranspose,
+                                     Dense, Dropout, Flatten, Input, Lambda,
+                                     Layer, Reshape)
+from tensorflow.keras.metrics import binary_crossentropy
+from tensorflow.keras.models import Model
 
 
 def sample_z(args):
