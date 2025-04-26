@@ -2,9 +2,9 @@
 using LSTM encoder and CNN decoder."""
 
 import tensorflow.keras.backend as K
-from tensorflow.keras.layers import (LSTM, BatchNormalization, Conv2DTranspose,
-                                     Dense, Dropout, Flatten, Input, Lambda,
-                                     Layer, Reshape)
+from tensorflow.keras.layers import (LSTM, BatchNormalization, Conv2D,
+                                     Conv2DTranspose, Dense, Dropout, Flatten,
+                                     Input, Lambda, Layer, Reshape)
 from tensorflow.keras.metrics import binary_crossentropy
 from tensorflow.keras.models import Model
 
@@ -18,14 +18,27 @@ def sample_z(args):
 
 # TODO: Adjust the encoder for CNNs, add custom cnn layer
 def build_encoder(latent_dim, use_cnn=False):
-    """Creates the encoder model using an LSTM layer.
+    """Creates the encoder model using LSTM or CNN.
     Returns z_mu, z_sigma, and sampled z."""
     input_image = Input(shape=(28, 28), name='encoder_input')
-    x = LSTM(64, activation='relu')(input_image)
+
+    if use_cnn:
+        x = Reshape((28, 28, 1))(input_image)
+        x = Conv2D(32, kernel_size=3, activation='relu', padding='same')(x)
+        x = BatchNormalization()(x)
+        x = Conv2D(64, kernel_size=3, activation='relu',
+                   strides=2, padding='same')(x)
+        x = BatchNormalization()(x)
+        x = Flatten()(x)
+        x = Dense(64, activation='relu')(x)
+    else:
+        x = LSTM(64, activation='relu')(input_image)
+
     x = Dropout(0.2)(x)
     z_mu = Dense(latent_dim, name='latent_mu')(x)
     z_sigma = Dense(latent_dim, name='latent_sigma')(x)
     z = Lambda(sample_z, output_shape=(latent_dim,), name='z')([z_mu, z_sigma])
+
     return Model(input_image, [z_mu, z_sigma, z], name='Encoder')
 
 
