@@ -11,16 +11,13 @@ from utils import load_config, plot_latent_space, plot_loss, plot_sample_images
 
 def main():
 
-    config = load_config()
-
     parser = argparse.ArgumentParser()
-    parser.add_argument('--latent_dim', type=int,
-                        default=config["train"]["latent_dim"])
-    parser.add_argument('--epochs', type=int,
-                        default=config["train"]["epochs"])
-    parser.add_argument('--batch_size', type=int,
-                        default=config["train"]["batch_size"])
+    parser.add_argument('--latent_dim', type=int)
+    parser.add_argument('--epochs', type=int)
+    parser.add_argument('--batch_size', type=int)
     args = parser.parse_args()
+
+    config = load_config()
 
     encoder, decoder, vae = build_vae(args.latent_dim)
 
