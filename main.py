@@ -12,9 +12,9 @@ from utils import load_config, plot_latent_space, plot_loss, plot_sample_images
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--latent_dim', type=int)
-    parser.add_argument('--epochs', type=int)
-    parser.add_argument('--batch_size', type=int)
+    parser.add_argument('--latent_dim', type=int, default=2)
+    parser.add_argument('--epochs', type=int, default=50)
+    parser.add_argument('--batch_size', type=int, default=128)
     args = parser.parse_args()
 
     config = load_config()
