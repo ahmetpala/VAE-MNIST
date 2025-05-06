@@ -2,11 +2,16 @@ import argparse
 import os
 from pathlib import Path
 
+import numpy as np
+import tensorflow as tf
 from keras.datasets import mnist
 
 from generator import generate_samples
 from model import build_vae
 from utils import load_config, plot_latent_space, plot_loss, plot_sample_images
+
+np.random.seed(2025)
+tf.random.set_seed(2025)
 
 
 def main():

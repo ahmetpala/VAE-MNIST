@@ -38,7 +38,9 @@ def generate_samples():
     plt.title("100 samples generated from trained decoder")
     plt.imshow(figure, cmap='gray')
     plt.axis("off")
-    plt.savefig(os.path.join(figures_dir, "example_plots.png"))
+    plt.savefig(os.path.join(figures_dir, "example_plots.png"),
+                dpi=300, bbox_inches='tight')
+
     plt.show()
 
 
